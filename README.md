@@ -19,4 +19,4 @@ Ya con esa solucion logro  mostrar correctamente la información de los usuarios
     - Se corrigió usando dos parámetros, uno para los nombres y otro para los correos.
     - Se utilizaron parámetros diferentes para evitar vulnerabilidades de SQL.
 
-4.
+4. Se implementó una funcionalidad de búsqueda en tiempo real para filtrar usuarios por nombre sin necesidad de recargar la página.

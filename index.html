@@ -23,12 +23,18 @@
     
     <button class="btn-primary" onclick="loadUsers()">Cargar Usuarios</button>
     <div id="userList">Los usuarios aparecerán aquí...</div>
+
+    <br><br>
+    <input type="text" id="searchInput" placeholder="Buscar usuario por nombre...">
+
 </div>
 
 <script>
     // Tarea 3 (Lógica SQL): Corrige esta consulta para insertar un usuario.
     // Consulta actual: INSERT INTO estudiantes (nombre, correo) VALUES (userName);
-    // Tu corrección: INSERT INTO estudiantes (nombre, correo) VALUES ($Y, $X);
+    // Tu corrección: INSERT INTO estudiantes (nombre, correo) VALUES ($1, $2);
+
+    let allUsers = [];
 
     function loadUsers() {
         const userList = document.getElementById('userList');
@@ -37,23 +43,40 @@
         fetch('https://jsonplaceholder.typicode.com/users')
             .then(response => response.json())
             .then(users => {
+                allUsers = users;
                 userList.innerHTML = '';
-                users.forEach(user => {
-                    const div = document.createElement('div');
-                    div.className = 'user-card';
-                    
-                    // Bug 2: Los datos no se muestran correctamente. Revisa las propiedades del objeto 'user'.
-                    div.innerHTML = `<strong>${user.name}</strong> - ${user.email}`; 
-                    
-                    userList.appendChild(div);
-                    console.log(users[0]);
-                });
+                renderUsers(users);
             })
             .catch(error => {
                 userList.innerHTML = 'Error al cargar los usuarios.';
                 console.error(error);
             });
     }
+
+    function renderUsers(users) {
+        const userList = document.getElementById('userList');
+        userList.innerHTML = '';
+
+        users.forEach(user => {
+            const div = document.createElement('div');
+            div.className = 'user-card';
+            div.innerHTML = `<strong>${user.name}</strong> - ${user.email}`;
+            userList.appendChild(div);
+        });
+    }
+
+    document
+    .getElementById('searchInput')
+    .addEventListener('input', function () {
+
+        const search = this.value.toLowerCase();
+
+        const filteredUsers = allUsers.filter(user =>
+            user.name.toLowerCase().includes(search)
+        );
+
+        renderUsers(filteredUsers);
+    });
 </script>
 
 </body>
