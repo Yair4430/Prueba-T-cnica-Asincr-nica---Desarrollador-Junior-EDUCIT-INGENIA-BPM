@@ -14,3 +14,9 @@ como solucion cambie la "e" por la "a" del css para dejarlo como en la clase del
     
 Ya con esa solucion logro  mostrar correctamente la información de los usuarios.
 
+3. 
+    - Había un error porque se intentaba insertar 2 columnas con 1 valor.
+    - Se corrigió usando dos parámetros, uno para los nombres y otro para los correos.
+    - Se utilizaron parámetros diferentes para evitar vulnerabilidades de SQL.
+
+4.
